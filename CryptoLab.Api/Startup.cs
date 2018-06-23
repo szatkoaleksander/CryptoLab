@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CryptoLab.Domain.IRepositories;
+using CryptoLab.Infrastructure.IServices;
+using CryptoLab.Infrastructure.EntityFramework;
+using CryptoLab.Infrastructure.Repositories;
+using CryptoLab.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -24,6 +30,13 @@ namespace CryptoLab.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
+            services.AddDbContext<Context>(options =>
+                options.UseInMemoryDatabase("db"));
+
+
             services.AddMvc();
         }
 
