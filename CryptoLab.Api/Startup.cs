@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using CryptoLab.Infrastructure.JWT;
 
 namespace CryptoLab.Api
 {
@@ -32,6 +33,9 @@ namespace CryptoLab.Api
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            
+            services.AddSingleton<IEncrypter, Encrypter>();
+            services.AddSingleton<IJwtHandler, JwtHandler>();
 
             services.AddDbContext<Context>(options =>
                 options.UseInMemoryDatabase("db"));
