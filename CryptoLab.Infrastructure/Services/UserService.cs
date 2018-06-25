@@ -32,35 +32,9 @@ namespace CryptoLab.Infrastructure.Services
             return user;
         }
 
-        public async Task LoginAsync(string email, string password)
-        {
-            var user = await _userRepository.FindAsync(email);
-
-            if(user == null)
-            {
-                throw new Exception("Invalid credentials");
-            }
-
-            var salt = _encrypter.GetSalt(password);
-            var hash = _encrypter.GetHash(password, user.Salt);
-
-            if(hash == null)
-            {
-                throw new Exception("Invalid credentials");
-            }
-
-            if(user.Password == hash)
-            {
-                return;
-            }
-
-            throw new Exception("Invalid credentials");
-        }
-
         public async Task RegisterAsync(string email, string username, string password)
         {
             var user = await _userRepository.FindAsync(email);
-
             if(user != null) 
                 throw new Exception("User is exists");
 
@@ -70,13 +44,6 @@ namespace CryptoLab.Infrastructure.Services
             user = new User(email, username, hash, salt, "user");
 
             await _userRepository.AddAsync(user);
-        }
-
-        public async Task RemoveAccountAsync(Guid id)
-        {
-            var user = await _userRepository.FindAsync(id);
-
-            await _userRepository.RemoveAsync(user);
         }
     }
 }

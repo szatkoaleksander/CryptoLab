@@ -10,12 +10,14 @@ namespace CryptoLab.Infrastructure.Handlers.User
 {
     public class LoginHandler : ICommandHandler<Login>
     {
+        private readonly IAccountService _accountService;
         private readonly IUserService _userService;
         private readonly IJwtHandler _jwtHandler;
         private readonly IMemoryCache _cache;
 
-        public LoginHandler(IUserService userService, IJwtHandler jwtHandler, IMemoryCache cache)
+        public LoginHandler(IAccountService accountService, IUserService userService, IJwtHandler jwtHandler, IMemoryCache cache)
         {
+            _accountService = accountService;
             _userService = userService;
             _jwtHandler = jwtHandler;
             _cache = cache;
@@ -23,7 +25,7 @@ namespace CryptoLab.Infrastructure.Handlers.User
 
         public async Task HandlerAsync(Login command)
         {
-            await _userService.LoginAsync(command.Email, command.Password);
+            await _accountService.LoginAsync(command.Email, command.Password);
 
             var user = await _userService.FindAsync(command.Email);
             var jwt = _jwtHandler.CreateToken(user.Id, user.Role);
