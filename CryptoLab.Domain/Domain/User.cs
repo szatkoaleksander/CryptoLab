@@ -15,6 +15,8 @@ namespace CryptoLab.Domain.Domain
 
         public User(string email, string username, string password, string salt, string role)
         {
+            Id = Guid.NewGuid();
+            
             SetEmail(email);
             SetUsername(username);
             SetPassword(password, salt);
