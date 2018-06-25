@@ -41,7 +41,9 @@ namespace CryptoLab.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAccountService, AccountService>();
             
             services.AddSingleton<IEncrypter, Encrypter>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
@@ -83,7 +85,6 @@ namespace CryptoLab.Api
                     ValidateLifetime = true, 
                     RoleClaimType = "roles", 
                    
-            
                     ClockSkew = TimeSpan.Zero 
                 };
             });
