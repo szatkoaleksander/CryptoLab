@@ -21,7 +21,7 @@ namespace CryptoLab.Infrastructure.Repositories
            => await _context.User.SingleOrDefaultAsync(x => x.Id == id);
 
         public async Task<User> FindAsync(string email)
-           => await _context.User.SingleOrDefaultAsync(x => x.Email == email);
+           => await _context.User.Include(x => x.Wallets).SingleOrDefaultAsync(x => x.Email == email);
 
         public async Task AddAsync(User user)
         {
