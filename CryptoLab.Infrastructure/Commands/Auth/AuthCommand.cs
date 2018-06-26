@@ -2,7 +2,7 @@ using System;
 
 namespace CryptoLab.Infrastructure.Commands.Auth
 {
-    public class AuthCommandBase : IAuthCommand
+    public class AuthCommand : IAuthCommand
     {
         public Guid UserId { get; set; }
     }
