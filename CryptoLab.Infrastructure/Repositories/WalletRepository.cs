@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CryptoLab.Domain.Domain;
@@ -16,6 +17,10 @@ namespace CryptoLab.Infrastructure.Repositories
         {
             _context = context;
         }
+
+        public async Task<IEnumerable<Wallet>> GetByUserId(Guid userId)
+            => await _context.Wallet.Where(x => x.UserId == userId).ToListAsync();
+
         public async Task<IEnumerable<Wallet>> GetAsync()
            => await _context.Wallet.ToListAsync();
 
@@ -24,6 +29,7 @@ namespace CryptoLab.Infrastructure.Repositories
             await _context.Wallet.AddAsync(wallet);
             await _context.SaveChangesAsync();
         }
+
         public async Task UpdateAsync(Wallet wallet)
         {
             _context.Wallet.Update(wallet);
