@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace CryptoLab.Domain.Domain
 {
@@ -12,6 +13,8 @@ namespace CryptoLab.Domain.Domain
         public string Role { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
+        public ICollection<Wallet> Wallets { get; protected set; }
+        public ICollection<History> Histories { get; protected set; }
 
         public User(string email, string username, string password, string salt, string role)
         {
@@ -23,6 +26,9 @@ namespace CryptoLab.Domain.Domain
             Role = role;
 
             CreatedAt = DateTime.UtcNow;
+
+            Wallets = new List<Wallet>();
+            Histories = new List<History>();
         }
 
         protected User() {}
