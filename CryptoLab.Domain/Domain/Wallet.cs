@@ -29,7 +29,7 @@ namespace CryptoLab.Domain.Domain
 
         public void SetCurrnecy(string currency)
         {
-            Currnecy = currency;
+            Currnecy = currency.ToUpperInvariant();
         }
 
         public void SetAmountOfMoney(double amountOfMoney)
