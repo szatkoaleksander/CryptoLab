@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using CryptoLab.Infrastructure.Commands;
-using CryptoLab.Infrastructure.Commands.Exchange;
+using CryptoLab.Infrastructure.Commands.Transaction;
 using CryptoLab.Infrastructure.IServices;
 
-namespace CryptoLab.Infrastructure.Handlers.Exchange
+namespace CryptoLab.Infrastructure.Handlers.Transaction
 {
     public class FastBuyHandler : ICommandHandler<FastBuy>
     {
