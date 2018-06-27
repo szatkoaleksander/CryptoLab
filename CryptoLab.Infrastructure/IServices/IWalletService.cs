@@ -7,9 +7,7 @@ namespace CryptoLab.Infrastructure.IServices
 {
     public interface IWalletService
     {
-          Task<IEnumerable<Wallet>> GetAsync();
+          Task<IEnumerable<Wallet>> RankingAsync();
           Task AddAsync(string currency, Guid userId);
-          Task UpdateAsync(string currency, double amountOfMoney, Guid userId, Guid walletId);
-
     }
 }
