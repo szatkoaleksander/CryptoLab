@@ -25,6 +25,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
+using Newtonsoft.Json;
+using CryptoLab.Infrastructure.CryptoCompareApi;
 
 namespace CryptoLab.Api
 {
@@ -41,10 +43,15 @@ namespace CryptoLab.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IHistoryRepository, HistoryRepository>();
+            services.AddScoped<IWalletRepository, WalletRepository>();
             
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAccountService, AccountService>();
-            
+            services.AddScoped<IWalletService, WalletService>();
+            services.AddScoped<ITransactionService, TransactionService>();
+          
+            services.AddSingleton<ICryptoCompareApi, CryptoCompareApi>();
             services.AddSingleton<IEncrypter, Encrypter>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
 
@@ -74,7 +81,6 @@ namespace CryptoLab.Api
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("000_cat_test_key_123")),  
 
@@ -82,14 +88,15 @@ namespace CryptoLab.Api
                     ValidIssuer = "http://localhost:5000",
 
                     ValidateAudience = false,   
-                    ValidateLifetime = true, 
-                    RoleClaimType = "roles", 
+                    ValidateLifetime = true,  
                    
                     ClockSkew = TimeSpan.Zero 
                 };
             });
 
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented)
+                .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             var builder = new ContainerBuilder();
                 builder.Populate(services);
