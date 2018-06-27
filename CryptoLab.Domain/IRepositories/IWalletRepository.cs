@@ -7,8 +7,8 @@ namespace CryptoLab.Domain.IRepositories
 {
     public interface IWalletRepository
     {
-        Task<IEnumerable<Wallet>> GetByUserId(Guid userId);
-        Task<IEnumerable<Wallet>> GetAsync();
+        Task<IEnumerable<Wallet>> GetByUserIdAsync(Guid userId);
+        Task<IEnumerable<Wallet>> GetAllAsync();
         Task AddAsync(Wallet wallet);
         Task UpdateAsync(Wallet wallet);
     }

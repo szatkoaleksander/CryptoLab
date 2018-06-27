@@ -18,10 +18,10 @@ namespace CryptoLab.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Wallet>> GetByUserId(Guid userId)
+        public async Task<IEnumerable<Wallet>> GetByUserIdAsync(Guid userId)
             => await _context.Wallet.Where(x => x.UserId == userId).ToListAsync();
 
-        public async Task<IEnumerable<Wallet>> GetAsync()
+        public async Task<IEnumerable<Wallet>> GetAllAsync()
            => await _context.Wallet.ToListAsync();
 
         public async Task AddAsync(Wallet wallet)
