@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CryptoLab.Domain.Domain;
 using CryptoLab.Domain.IRepositories;
 using CryptoLab.Infrastructure.IServices;
+using System.Linq;
 
 namespace CryptoLab.Infrastructure.Services
 {
@@ -19,7 +20,7 @@ namespace CryptoLab.Infrastructure.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<Wallet>> GetAsync()
+        public async Task<IEnumerable<Wallet>> RankingAsync()
         {
             throw new NotImplementedException();
         }
@@ -27,14 +28,12 @@ namespace CryptoLab.Infrastructure.Services
         public async Task AddAsync(string currency, Guid userId)
         {
             var user = await _userRepository.FindAsync(userId);
+            var userWallets = await _walletRepository.GetByUserIdAsync(userId);
 
-            var userWallets = await _walletRepository.GetByUserId(userId);
+            var walletIsExist = userWallets.Select(x => x.Currnecy == currency).FirstOrDefault();
 
-            foreach(var i in userWallets)
-            {
-                if(i.Currnecy == currency)
-                    throw new Exception("This wallet is exsist for this user");
-            }
+            if(walletIsExist == true)
+                throw new Exception("This wallet is exist for this user");
 
             double amountOfMoney = 0;
             
@@ -45,11 +44,6 @@ namespace CryptoLab.Infrastructure.Services
             var wallet = new Wallet(currency, amountOfMoney, user);
 
             await _walletRepository.AddAsync(wallet);
-        }
-
-        public async Task UpdateAsync(string currency, double amountOfMoney, Guid userId, Guid walletId)
-        {
-            throw new NotImplementedException();
         }
     }
 }
