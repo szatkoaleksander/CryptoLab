@@ -7,6 +7,7 @@ using CryptoLab.Infrastructure.IServices;
 using CryptoLab.Infrastructure.EntityFramework;
 using CryptoLab.Infrastructure.Repositories;
 using CryptoLab.Infrastructure.Services;
+using CryptoLab.Infrastructure.AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -54,6 +55,8 @@ namespace CryptoLab.Api
             services.AddSingleton<ICryptoCompareApi, CryptoCompareApi>();
             services.AddSingleton<IEncrypter, Encrypter>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
+
+            services.AddSingleton(AutoMapperConfig.Initialize());
 
 
             services.AddDbContext<Context>(options =>
