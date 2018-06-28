@@ -37,9 +37,6 @@ namespace CryptoLab.Infrastructure.Services
 
                 var sumofMoney = userWallets.Where(x => x.Currnecy == "USD").FirstOrDefault().AmountOfMoney;
 
-                if(sumofMoney == null)
-                    throw new Exception("!");
-
                 foreach(var j in userWallets)
                 {
                     if(j.Currnecy != "USD")
