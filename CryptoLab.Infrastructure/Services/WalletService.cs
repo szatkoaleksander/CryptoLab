@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -6,6 +5,7 @@ using CryptoLab.Domain.Domain;
 using CryptoLab.Domain.IRepositories;
 using CryptoLab.Infrastructure.IServices;
 using System.Linq;
+using CryptoLab.Infrastructure.CryptoCompareApi;
 
 namespace CryptoLab.Infrastructure.Services
 {
@@ -13,16 +13,46 @@ namespace CryptoLab.Infrastructure.Services
     {
         private readonly IWalletRepository _walletRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ICryptoCompareApi _cryptoCompareApi;
 
-        public WalletService(IWalletRepository walletRepository, IUserRepository userRepository)
+        public WalletService(IWalletRepository walletRepository, IUserRepository userRepository, ICryptoCompareApi cryptoCompareApi)
         {
             _walletRepository = walletRepository;
             _userRepository = userRepository;
+            _cryptoCompareApi = cryptoCompareApi;
         }
 
-        public async Task<IEnumerable<Wallet>> RankingAsync()
+        public async Task<Dictionary<string, double>> RankingAsync()
         {
-            throw new NotImplementedException();
+            Dictionary<string, double> ranking = new Dictionary<string, double>();
+
+            var users = await _userRepository.GetAllAsync();
+
+            foreach(var i in users)
+            {
+                var userWallets = await _walletRepository.GetByUserIdAsync(i.Id);
+
+                if(userWallets == null)
+                    continue;
+
+                var sumofMoney = userWallets.Where(x => x.Currnecy == "USD").FirstOrDefault().AmountOfMoney;
+
+                if(sumofMoney == null)
+                    throw new Exception("!");
+
+                foreach(var j in userWallets)
+                {
+                    if(j.Currnecy != "USD")
+                    {
+                        var walletMoneyInUsd = await _cryptoCompareApi.GetCryptoPriceInUsd(j.Currnecy);
+                        sumofMoney += j.AmountOfMoney * walletMoneyInUsd;
+                    }
+                }
+
+                ranking.Add(i.Username, sumofMoney);
+            }
+
+            return ranking;
         }
 
         public async Task AddAsync(string currency, Guid userId)
