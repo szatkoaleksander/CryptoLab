@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CryptoLab.Domain.Domain;
@@ -22,6 +23,13 @@ namespace CryptoLab.Infrastructure.Repositories
 
         public async Task<User> FindAsync(string email)
            => await _context.User.Include(x => x.Wallets).SingleOrDefaultAsync(x => x.Email == email);
+
+        public async Task<User> FindByUsernameAsync(string username)
+            => await _context.User.Include(x => x.Wallets).SingleOrDefaultAsync(x => x.Username == username);
+
+           
+        public async Task<IEnumerable<User>> GetAllAsync()
+            => await _context.User.ToListAsync();
 
         public async Task AddAsync(User user)
         {
