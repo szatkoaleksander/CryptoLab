@@ -35,7 +35,12 @@ namespace CryptoLab.Infrastructure.Services
         public async Task RegisterAsync(string email, string username, string password)
         {
             var user = await _userRepository.FindAsync(email);
+            var userUsername = await _userRepository.FindByUsernameAsync(username);
+
             if(user != null) 
+                throw new Exception("User is exists");
+
+            if(userUsername != null && userUsername.Username == username) 
                 throw new Exception("User is exists");
 
             var salt = _encrypter.GetSalt(password);
