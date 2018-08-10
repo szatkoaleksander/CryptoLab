@@ -17,6 +17,6 @@ namespace CryptoLab.Infrastructure.Commands.Transaction
                 fromCurrency = value.ToUpperInvariant();
             }
         }
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
     }
 }

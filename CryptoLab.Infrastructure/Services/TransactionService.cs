@@ -20,7 +20,7 @@ namespace CryptoLab.Infrastructure.Services
             _cryptoCompareApi = cryptoCompareApi;
         }
         
-        public async Task FastBuyTransactionAsync(string toCurrnecy, double amount, Guid userId)
+        public async Task FastBuyTransactionAsync(string toCurrnecy, decimal amount, Guid userId)
         {
             var user = await _userRepository.FindAsync(userId); 
             var wallet = await _walletRepository.GetByUserIdAsync(userId); 
@@ -40,7 +40,7 @@ namespace CryptoLab.Infrastructure.Services
             await _walletRepository.UpdateAsync(toWallet);
         }
 
-        public async Task FastSellTransactionAsync(string fromCurrnecy, double amount, Guid userId)
+        public async Task FastSellTransactionAsync(string fromCurrnecy, decimal amount, Guid userId)
         {
             var user = await _userRepository.FindAsync(userId); 
             var wallet = await _walletRepository.GetByUserIdAsync(userId); 

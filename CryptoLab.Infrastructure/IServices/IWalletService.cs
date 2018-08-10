@@ -7,7 +7,7 @@ namespace CryptoLab.Infrastructure.IServices
 {
     public interface IWalletService
     {
-          Task<Dictionary<string, double>> RankingAsync();
+          Task<Dictionary<string, decimal>> RankingAsync();
           Task AddAsync(string currency, Guid userId);
     }
 }

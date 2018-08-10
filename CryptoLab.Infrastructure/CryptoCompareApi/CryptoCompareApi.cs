@@ -7,7 +7,7 @@ namespace CryptoLab.Infrastructure.CryptoCompareApi
 {
     public class CryptoCompareApi : ICryptoCompareApi
     {
-        public async Task<double> GetCryptoPriceInUsd(string toCurrnecy)
+        public async Task<decimal> GetCryptoPriceInUsd(string toCurrnecy)
         {
             string to = toCurrnecy;
             string url = $"https://min-api.cryptocompare.com/data/price?fsym={to}&tsyms=USD";
@@ -23,7 +23,7 @@ namespace CryptoLab.Infrastructure.CryptoCompareApi
 
             dynamic json = JObject.Parse(data);
 
-            return (double)json.USD;
+            return (decimal)json.USD;
         }
     }
 }

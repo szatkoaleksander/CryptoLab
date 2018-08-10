@@ -22,34 +22,36 @@ namespace CryptoLab.Infrastructure.Services
             _cryptoCompareApi = cryptoCompareApi;
         }
 
-        public async Task<Dictionary<string, double>> RankingAsync()
+        public async Task<Dictionary<string, decimal>> RankingAsync()
         {
-            Dictionary<string, double> ranking = new Dictionary<string, double>();
+            // Dictionary<string, decimal> ranking = new Dictionary<string, decimal>();
 
-            var users = await _userRepository.GetAllAsync();
+            // var users = await _userRepository.GetAllAsync();
 
-            foreach(var i in users)
-            {
-                var userWallets = await _walletRepository.GetByUserIdAsync(i.Id);
+            // foreach(var i in users)
+            // {
+            //     var userWallets = await _walletRepository.GetByUserIdAsync(i.Id);
 
-                if(userWallets == null)
-                    continue;
+            //     if(userWallets == null)
+            //         continue;
 
-                var sumofMoney = userWallets.Where(x => x.Currnecy == "USD").FirstOrDefault().AmountOfMoney;
+            //     var sumofMoney = userWallets.Where(x => x.Currnecy == "USD").FirstOrDefault().AmountOfMoney;
 
-                foreach(var j in userWallets)
-                {
-                    if(j.Currnecy != "USD")
-                    {
-                        var walletMoneyInUsd = await _cryptoCompareApi.GetCryptoPriceInUsd(j.Currnecy);
-                        sumofMoney += j.AmountOfMoney * walletMoneyInUsd;
-                    }
-                }
+            //     foreach(var j in userWallets)
+            //     {
+            //         if(j.Currnecy != "USD")
+            //         {
+            //             var walletMoneyInUsd = await _cryptoCompareApi.GetCryptoPriceInUsd(j.Currnecy);
+            //             sumofMoney += j.AmountOfMoney * walletMoneyInUsd;
+            //         }
+            //     }
 
-                ranking.Add(i.Username, sumofMoney);
-            }
+            //     ranking.Add(i.Username, sumofMoney);
+            // }
 
-            return ranking;
+            // return ranking;
+
+            return null;
         }
 
         public async Task AddAsync(string currency, Guid userId)
@@ -62,7 +64,7 @@ namespace CryptoLab.Infrastructure.Services
             if(walletIsExist == true)
                 throw new Exception("This wallet is exist for this user");
 
-            double amountOfMoney = 0;
+            decimal amountOfMoney = 0.0m;
             
             if(currency == "USD")
                 amountOfMoney = 50000;

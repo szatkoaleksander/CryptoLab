@@ -4,6 +4,6 @@ namespace CryptoLab.Infrastructure.CryptoCompareApi
 {
     public interface ICryptoCompareApi
     {
-         Task<double> GetCryptoPriceInUsd(string toCurrnecy);
+         Task<decimal> GetCryptoPriceInUsd(string toCurrnecy);
     }
 }
