@@ -59,7 +59,7 @@ namespace CryptoLab.Infrastructure.Services
             var user = await _userRepository.FindAsync(userId);
             var userWallets = await _walletRepository.GetByUserIdAsync(userId);
 
-            var walletIsExist = userWallets.Select(x => x.Currnecy == currency).FirstOrDefault();
+            var walletIsExist = userWallets.Select(x => x.Currency == currency).FirstOrDefault();
 
             if(walletIsExist == true)
                 throw new Exception("This wallet is exist for this user");

@@ -5,7 +5,7 @@ namespace CryptoLab.Domain.Domain
     public class Wallet
     {
         public Guid Id { get; protected set; }
-        public string Currnecy { get; protected set; }
+        public string Currency { get; protected set; }
         public decimal AmountOfMoney { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         public Guid UserId { get; protected set; }
@@ -16,7 +16,7 @@ namespace CryptoLab.Domain.Domain
         public Wallet(string currency, decimal amountOfMoney, User user)
         {
             Id = Guid.NewGuid();
-            SetCurrnecy(currency);
+            SetCurrency(currency);
             SetAmountOfMoney(amountOfMoney);
 
             UpdatedAt = DateTime.Now;
@@ -27,9 +27,9 @@ namespace CryptoLab.Domain.Domain
 
         protected Wallet() {}
 
-        public void SetCurrnecy(string currency)
+        public void SetCurrency(string currency)
         {
-            Currnecy = currency.ToUpperInvariant();
+            Currency = currency.ToUpperInvariant();
         }
 
         public void SetAmountOfMoney(decimal amountOfMoney)

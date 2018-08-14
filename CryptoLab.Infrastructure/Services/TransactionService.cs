@@ -27,8 +27,8 @@ namespace CryptoLab.Infrastructure.Services
 
             var price = await _cryptoCompareApi.GetCryptoPriceInUsd(toCurrnecy);
 
-            var fromWallet = wallet.Where(x => x.Currnecy == "USD" && (x.AmountOfMoney - (amount * price)) >= 0).SingleOrDefault();
-            var toWallet = wallet.Where(x => x.Currnecy == toCurrnecy).SingleOrDefault();
+            var fromWallet = wallet.Where(x => x.Currency == "USD" && (x.AmountOfMoney - (amount * price)) >= 0).SingleOrDefault();
+            var toWallet = wallet.Where(x => x.Currency == toCurrnecy).SingleOrDefault();
 
             if(fromWallet == null || toWallet == null)
                 throw new Exception("Wallet is not exists");
@@ -47,8 +47,8 @@ namespace CryptoLab.Infrastructure.Services
 
             var price = await _cryptoCompareApi.GetCryptoPriceInUsd(fromCurrnecy);
 
-            var fromWallet = wallet.Where(x => x.Currnecy == fromCurrnecy && (x.AmountOfMoney - amount) >= 0).SingleOrDefault();
-            var toWallet = wallet.Where(x => x.Currnecy == "USD").SingleOrDefault();
+            var fromWallet = wallet.Where(x => x.Currency == fromCurrnecy && (x.AmountOfMoney - amount) >= 0).SingleOrDefault();
+            var toWallet = wallet.Where(x => x.Currency == "USD").SingleOrDefault();
 
             if(fromWallet == null || toWallet == null)
                 throw new Exception("Wallet is not exists");
