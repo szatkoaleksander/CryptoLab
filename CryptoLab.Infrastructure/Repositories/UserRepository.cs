@@ -19,7 +19,7 @@ namespace CryptoLab.Infrastructure.Repositories
         }
         
         public async Task<User> FindAsync(Guid id)
-           => await _context.User.SingleOrDefaultAsync(x => x.Id == id);
+           => await _context.User.Include(x => x.Wallets).SingleOrDefaultAsync(x => x.Id == id);
 
         public async Task<User> FindAsync(string email)
            => await _context.User.Include(x => x.Wallets).SingleOrDefaultAsync(x => x.Email == email);
