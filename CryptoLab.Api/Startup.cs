@@ -101,6 +101,8 @@ namespace CryptoLab.Api
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented)
                 .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+            services.AddCors();
+
             var builder = new ContainerBuilder();
                 builder.Populate(services);
                 builder.RegisterModule<CommandModule>();
@@ -120,6 +122,12 @@ namespace CryptoLab.Api
             {
                 app.UseHsts();
             }
+
+            app.UseCors(builder => builder.WithOrigins("http://localhost:8080")
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());   
 
             app.UseMvc();
             app.UseAuthentication();
