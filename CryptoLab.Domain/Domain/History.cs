@@ -5,7 +5,7 @@ namespace CryptoLab.Domain.Domain
     public class History
     {
         public Guid Id { get; protected set; }
-        public bool BuySell { get; protected set; }
+        public OperationType OperationType { get; protected set; }
         public string Currency { get; protected set; }
         public decimal AmountOfMoney { get; protected set; }
         public decimal Price { get; protected set; }
@@ -13,10 +13,10 @@ namespace CryptoLab.Domain.Domain
         public Guid UserId { get; protected set; }
         public User User { get; protected set; }
 
-        public History(bool buySell, string currency, decimal amountOfMoney, decimal price, User user)
+        public History(OperationType operationType, string currency, decimal amountOfMoney, decimal price, User user)
         {
             Id = Guid.NewGuid();
-            BuySell = buySell;
+            OperationType = operationType;
             Currency = currency;
             AmountOfMoney = amountOfMoney;
             Price = price;
