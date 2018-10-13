@@ -5,9 +5,9 @@ using Newtonsoft.Json.Linq;
 
 namespace CryptoLab.Infrastructure.CryptoCompareApi
 {
-    public class CryptoCompareApi : ICryptoCompareApi
+    public static class CryptoCompare
     {
-        public async Task<decimal> GetCryptoPriceInUsd(string toCurrnecy)
+        public static async Task<decimal> GetCryptoPriceInUsd(string toCurrnecy)
         {
             string to = toCurrnecy;
             string url = $"https://min-api.cryptocompare.com/data/price?fsym={to}&tsyms=USD";

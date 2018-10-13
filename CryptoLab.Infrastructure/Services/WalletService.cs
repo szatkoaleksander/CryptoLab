@@ -13,45 +13,16 @@ namespace CryptoLab.Infrastructure.Services
     {
         private readonly IWalletRepository _walletRepository;
         private readonly IUserRepository _userRepository;
-        private readonly ICryptoCompareApi _cryptoCompareApi;
 
-        public WalletService(IWalletRepository walletRepository, IUserRepository userRepository, ICryptoCompareApi cryptoCompareApi)
+        public WalletService(IWalletRepository walletRepository, IUserRepository userRepository)
         {
             _walletRepository = walletRepository;
             _userRepository = userRepository;
-            _cryptoCompareApi = cryptoCompareApi;
         }
 
-        public async Task<Dictionary<string, decimal>> RankingAsync()
+        public Task<Dictionary<string, decimal>> RankingAsync()
         {
-            // Dictionary<string, decimal> ranking = new Dictionary<string, decimal>();
-
-            // var users = await _userRepository.GetAllAsync();
-
-            // foreach(var i in users)
-            // {
-            //     var userWallets = await _walletRepository.GetByUserIdAsync(i.Id);
-
-            //     if(userWallets == null)
-            //         continue;
-
-            //     var sumofMoney = userWallets.Where(x => x.Currnecy == "USD").FirstOrDefault().AmountOfMoney;
-
-            //     foreach(var j in userWallets)
-            //     {
-            //         if(j.Currnecy != "USD")
-            //         {
-            //             var walletMoneyInUsd = await _cryptoCompareApi.GetCryptoPriceInUsd(j.Currnecy);
-            //             sumofMoney += j.AmountOfMoney * walletMoneyInUsd;
-            //         }
-            //     }
-
-            //     ranking.Add(i.Username, sumofMoney);
-            // }
-
-            // return ranking;
-
-            return null;
+            throw new NotImplementedException();
         }
 
         public async Task AddAsync(string currency, Guid userId)
