@@ -6,18 +6,18 @@ namespace CryptoLab.Domain.Domain
     {
         public Guid Id { get; protected set; }
         public bool BuySell { get; protected set; }
-        public string Currnecy { get; protected set; }
+        public string Currency { get; protected set; }
         public decimal AmountOfMoney { get; protected set; }
         public decimal Price { get; protected set; }
         public DateTime ExchangeTime { get; protected set; } 
         public Guid UserId { get; protected set; }
         public User User { get; protected set; }
 
-        public History(bool buySell, string currnecy, decimal amountOfMoney, decimal price, User user)
+        public History(bool buySell, string currency, decimal amountOfMoney, decimal price, User user)
         {
             Id = Guid.NewGuid();
             BuySell = buySell;
-            Currnecy = currnecy;
+            Currency = currency;
             AmountOfMoney = amountOfMoney;
             Price = price;
 
