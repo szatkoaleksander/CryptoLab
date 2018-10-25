@@ -76,6 +76,5 @@ namespace CryptoLab.Api.Controllers
 
             return Created($"users/{command.Email}", new object());
         }
-        
     }
 }
