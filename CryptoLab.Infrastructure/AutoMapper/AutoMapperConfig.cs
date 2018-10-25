@@ -12,6 +12,7 @@ namespace CryptoLab.Infrastructure.AutoMapper
             {
                 cfg.CreateMap<User, UserDto>();
                 cfg.CreateMap<Wallet, WalletDto>();
+                cfg.CreateMap<History, HistoryDto>();
             })
             .CreateMapper();
 
