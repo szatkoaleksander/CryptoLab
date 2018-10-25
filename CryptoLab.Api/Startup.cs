@@ -28,6 +28,7 @@ using System.Text;
 using System.Security.Claims;
 using Newtonsoft.Json;
 using CryptoLab.Infrastructure.CryptoCompareApi;
+using CryptoLab.Infrastructure.Hubs;
 
 namespace CryptoLab.Api
 {
@@ -51,8 +52,8 @@ namespace CryptoLab.Api
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IWalletService, WalletService>();
             services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<IHistoryService, HistoryService>();
           
-            services.AddSingleton<ICryptoCompareApi, CryptoCompareApi>();
             services.AddSingleton<IEncrypter, Encrypter>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
 
@@ -79,7 +80,8 @@ namespace CryptoLab.Api
             {  
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;  
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
-            })  
+            })
+              
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -95,7 +97,21 @@ namespace CryptoLab.Api
                    
                     ClockSkew = TimeSpan.Zero 
                 };
+
+                options.Events = new JwtBearerEvents()
+                {
+                    OnMessageReceived = context =>
+                    {
+                        if (context.Request.Path.ToString().StartsWith("/hub/"))
+                        {
+                            context.Token = context.Request.Query["access_token"];
+                        }
+                        return Task.CompletedTask;
+                    },
+                };
             });
+
+            services.AddSignalR();
 
             services.AddMvc()
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented)
@@ -129,9 +145,15 @@ namespace CryptoLab.Api
                 .AllowAnyHeader()
                 .AllowCredentials());   
 
-            app.UseMvc();
             app.UseAuthentication();
 
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<HistoryHub>("/hub/histories");
+            });
+
+            app.UseMvc();
+        
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
     }
