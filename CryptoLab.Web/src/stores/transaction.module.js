@@ -5,17 +5,17 @@ import { FAST_BUY_TRANSACTION, FAST_SELL_TRANSACTION } from './actions.type'
 
 const actions = {
   [FAST_BUY_TRANSACTION] (context, payload) {
-    axios.post(API_URL + '/transactions/fastbuy', {
+    axios.post(API_URL + 'transactions/fastbuy', {
       toCurrency: payload.currency,
-      amount: payload.amountOfMoney
+      amount: payload.amountOfMoneyToBuy
     }, {
       headers: { Authorization: 'Bearer ' + JwtService.getToken() }
     })
   },
   [FAST_SELL_TRANSACTION] (context, payload) {
-    axios.post(API_URL + '/transactions/fastsell', {
+    axios.post(API_URL + 'transactions/fastsell', {
       fromCurrency: payload.currency,
-      amount: payload.amountOfMoney
+      amount: payload.amountOfMoneyToSell
     }, {
       headers: { Authorization: 'Bearer ' + JwtService.getToken() }
     })

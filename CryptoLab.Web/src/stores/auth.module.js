@@ -21,7 +21,7 @@ const getters = {
 const actions = {
   [LOGIN] (context, credentials) {
     return new Promise((resolve) => {
-      axios.post(API_URL + '/account/login', { 
+      axios.post(API_URL + 'account/login', { 
         email: credentials.email, 
         password: credentials.password 
       })
@@ -36,7 +36,7 @@ const actions = {
   },
   [REGISTER] (context, credentials) {
     return new Promise((resolve) => {
-      axios.post(API_URL + '/users/register', { 
+      axios.post(API_URL + 'users/register', { 
         email: credentials.email, 
         username: credentials.username, 
         password: credentials.password 

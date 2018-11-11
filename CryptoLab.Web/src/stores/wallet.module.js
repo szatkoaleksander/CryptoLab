@@ -17,7 +17,7 @@ const getters = {
 const actions = {
   [FETCH_WALLETS] (context) {
     return new Promise((resolve) => {
-    axios.get(API_URL + '/users/me', { headers: { Authorization: 'Bearer ' + JwtService.getToken() } })
+    axios.get(API_URL + 'users/me', { headers: { Authorization: 'Bearer ' + JwtService.getToken() } })
       .then(({ data }) => {
         context.commit(SET_WALLETS, data.wallets)
         resolve(data)
