@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import Dashboard from './views/Dashboard.vue'
 
 Vue.use(Router)
 
@@ -9,13 +7,25 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'MainPage',
+      component: () => import('@/views/MainPage')
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: Dashboard
+      path: '/app',
+      name: 'Home',
+      component: () => import('@/views/Home'),
+      children: [
+        {
+          path: 'dashboard',
+          name: 'Dashboard',
+          component: () => import('@/views/Dashboard')
+        },
+        {
+          path: 'market/:currency',
+          name: 'Market',
+          component: () => import('@/views/Market')
+        }
+      ]
     }
   ]
 })
