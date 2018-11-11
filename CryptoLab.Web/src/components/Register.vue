@@ -60,7 +60,6 @@ export default {
     onSubmit (email, username, password) {
       this.$store
         .dispatch(REGISTER, { email, username, password })
-        .then(() => this.$router.push({ name: 'dashboard' }))
     }
   }
 }

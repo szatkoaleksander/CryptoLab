@@ -1,17 +1,17 @@
 <template>
-  <div v-if="isAuthenticated">
-      <h1>Dashboard</h1>
+  <div>
+    <h1>Dashboard - component</h1>
+    <Wallet/>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import Wallet from '@/components/Wallet.vue'
 
 export default {
-  computed: {
-    ...mapGetters([
-      'isAuthenticated'
-    ])
+  name: 'Dashboard',
+  components: {
+    Wallet
   }
 }
 </script>

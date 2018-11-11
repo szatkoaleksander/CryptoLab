@@ -49,8 +49,8 @@ export default {
     onSubmit (email, password) {
       this.$store
         .dispatch(LOGIN, { email, password })
-        .then(() => this.$router.push({ name: 'dashboard' }))
-    },
+        .then(() => this.$router.push({ name: 'Dashboard' }))
+    }
   }
 }
 </script>
