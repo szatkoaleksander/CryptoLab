@@ -19,7 +19,7 @@ const actions = {
     }, {
       headers: { Authorization: 'Bearer ' + JwtService.getToken() }
     })
-  },
+  }
 }
 
 export default {

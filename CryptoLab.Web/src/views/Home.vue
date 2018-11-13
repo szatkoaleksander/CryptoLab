@@ -49,9 +49,6 @@
         <b-col> <!-- col-8 if do not work -->
           <router-view></router-view>
         </b-col>
-        <b-col class="shadow p-2 bg-white rounded" style="background-color: #eef2ed;" sm="2">
-          Ranking
-        </b-col>
       </b-row>
       <b-row class="shadow-lg p-4 rounded" style="color: #777777;">
         ©copyright by Aleksander Szatko
@@ -96,7 +93,7 @@ export default {
 li {
   color: #2060ea;
 }
-li a:hover { 
+li a:hover {
   background-color: #89C4F4;
 }
 </style>
