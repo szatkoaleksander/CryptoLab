@@ -10,5 +10,6 @@ namespace CryptoLab.Infrastructure.DTO
         public string Username { get; protected set; }
         public string Role { get; protected set; }
         public ICollection<WalletDto> Wallets { get; protected set; }
+        public ICollection<HistoryDto> Histories { get; protected set; }
     }
 }
