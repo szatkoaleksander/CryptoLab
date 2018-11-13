@@ -20,11 +20,11 @@ namespace CryptoLab.Infrastructure.Repositories
 
         public async Task<IEnumerable<History>> GetAllAsyncBy(Guid userId, string currency, OperationType operationType)
             => await _context.History.Where(x => x.UserId == userId)
-                                     .Where(x => x.Currency == currency)
+                                     .Where(x => x.Currency == currency.ToUpperInvariant())
                                      .Where(x => x.OperationType == operationType)
                                      .ToListAsync();
         public async Task<IEnumerable<History>> GetAllAsyncBy(string currency, OperationType operationType)
-           => await _context.History.Where(x => x.Currency == currency)
+           => await _context.History.Where(x => x.Currency == currency.ToUpperInvariant())
                                     .Where(x => x.OperationType == operationType)
                                     .ToListAsync();
 
