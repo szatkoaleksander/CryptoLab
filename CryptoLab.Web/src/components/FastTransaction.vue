@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-row class="shadow p-3 mb-3 bg-white rounded">
-      <b-col>
+    <b-row>
+      <b-col class="shadow p-3 mb-3 bg-white rounded mr-3">
       <b-form v-on:submit.prevent="buy(amountOfMoneyToBuy)">
         <b-form-group id="exampleInputGroup1"
           label="Buy coin:"
@@ -15,7 +15,7 @@
         <b-button size="sm" class="float-right" type="submit" variant="primary">Buy</b-button>
       </b-form>
       </b-col>
-      <b-col>
+      <b-col class="shadow p-3 mb-3 bg-white rounded">
       <b-form v-on:submit.prevent="sell(amountOfMoneyToSell)">
         <b-form-group id="exampleInputGroup2"
           label="Sell coin:"
