@@ -26,6 +26,15 @@ export default new Router({
           component: () => import('@/views/Market')
         }
       ]
-    }
+    },
+    { 
+      path: '/404',
+      name: 'NotFound', 
+      component: () => import('@/views/NotFound') 
+    },  
+    { 
+      path: '*', 
+      redirect: '/404' 
+    } 
   ]
 })
