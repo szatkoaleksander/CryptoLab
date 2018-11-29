@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CryptoLab.Domain.Domain;
+using CryptoLab.Infrastructure.DTO;
 
 namespace CryptoLab.Infrastructure.IServices
 {
     public interface IWalletService
     {
-          Task<Dictionary<string, decimal>> RankingAsync();
-          Task AddAsync(string currency, Guid userId);
+        Task<IEnumerable<WalletDto>> GetAllAsync(Guid userId);
+        Task AddAsync(IEnumerable<string> currencies, Guid userId);
     }
 }

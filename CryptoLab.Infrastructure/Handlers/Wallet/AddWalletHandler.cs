@@ -16,7 +16,7 @@ namespace CryptoLab.Infrastructure.Handlers.Wallet
 
         public async Task HandlerAsync(AddWallet command)
         {
-            await _walletService.AddAsync(command.Currency, command.UserId);
+            await _walletService.AddAsync(command.Currencies, command.UserId);
         }
     }
 }
