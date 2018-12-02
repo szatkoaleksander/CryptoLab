@@ -15,6 +15,13 @@ const getters = {
 }
 
 const actions = {
+  [ADD_WALLET] (context, payload) {
+    axios.post(API_URL + 'wallets/addwallet', {
+      currencies: payload.currency
+    }, {
+      headers: { Authorization: 'Bearer ' + JwtService.getToken() }
+    })
+  },
   [FETCH_WALLETS] (context) {
     return new Promise((resolve) => {
     axios.get(API_URL + 'users/me', { headers: { Authorization: 'Bearer ' + JwtService.getToken() } })
