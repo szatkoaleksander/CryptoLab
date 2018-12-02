@@ -6,7 +6,7 @@ import { FETCH_MARKET_HISTORIES_BUY, FETCH_MARKET_HISTORIES_SELL } from './actio
 import { SET_MARKET_HISTORIES_BUY, SET_MARKET_HISTORIES_SELL } from './mutations.type'
 
 const hubConnection = new HubConnectionBuilder()
-  .withUrl(API_URL + 'hub/histories', { accessTokenFactory: () => 'Bearer ' + JwtService.getToken() })
+  .withUrl('http://localhost:5000/hub/histories', { accessTokenFactory: () => 'Bearer ' + JwtService.getToken() })
   .configureLogging(LogLevel.Information)
   .build()
 hubConnection.start()
@@ -18,10 +18,11 @@ const state = {
 
 const getters = {
   marketHistoriesBuy (state) {
-    return state.marketHistoriesBuy
+    return state.marketHistoriesBuy.slice().reverse()
   },
   marketHistoriesSell (state) {
-    return state.marketHistoriesSell
+    return state.marketHistoriesSell.slice().reverse()
+  
   }
 }
 
