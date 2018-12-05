@@ -1,26 +1,6 @@
 <template>
   <div style="background-color: #eef2ed;">
-    <b-navbar toggleable type="light" variant="light">
-      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-      <b-navbar-brand href="#">
-        <router-link to="/app">CryptoLab</router-link>
-      </b-navbar-brand>
-      <b-collapse is-nav id="nav_collapse">
-        <b-navbar-nav class="ml-auto" left>
-          <b-nav-text href="#">
-            #test1
-          </b-nav-text>
-          <b-nav-text href="#">
-            #test2
-          </b-nav-text>
-        </b-navbar-nav>
-        <b-navbar-nav class="ml-auto" right>
-          <b-nav-text>
-            #test3
-          </b-nav-text>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
+    <Navbar/>
 
     <b-container fluid>
       <b-row>
@@ -34,14 +14,8 @@
               <div style="color: #2060ea;">Exchange</div>
             </b-nav-item>
             <b-collapse visible id="collapse3" style="margin-left: 25px;">
-              <b-nav-item>
-                <router-link tag="li" :to="{ name: 'Market', params: { currency: 'btc' } }">BTC</router-link>
-              </b-nav-item>
-              <b-nav-item>
-                <router-link tag="li" :to="{ path: '/app/market/ltc' }">LTC</router-link>
-              </b-nav-item>
-              <b-nav-item>
-                <router-link tag="li" :to="{ path: '/app/market/eth' }">ETH</router-link>
+              <b-nav-item v-bind:key="wallet.Id" v-for="wallet in userWallets">
+                <router-link tag="li" :to="{ name: 'Market', params: { currency: wallet.currency } }">{{wallet.currency}}</router-link>
               </b-nav-item>
             </b-collapse>
           </b-nav>
@@ -61,6 +35,7 @@
 import Dashboard from '@/views/Dashboard.vue'
 import Market from '@/views/Market.vue'
 import Wallet from '@/components/Wallet.vue'
+import Navbar from '@/components/Navbar.vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -68,12 +43,14 @@ export default {
   components: {
     Dashboard,
     Market,
-    Wallet
+    Wallet,
+    Navbar
   },
 
   computed: {
     ...mapGetters([
-      'isAuthenticated'
+      'isAuthenticated',
+      'userWallets'
     ])
   }
 }

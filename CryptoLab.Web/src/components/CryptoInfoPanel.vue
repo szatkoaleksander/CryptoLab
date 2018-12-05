@@ -28,7 +28,6 @@ import { mapGetters } from 'vuex'
 import CC_ws from '@/common/cryptocompare_ws.service'
 import io from 'socket.io-client'
 
-
 export default {
   name: 'CryptoInfoPanel',
   props: {
@@ -49,6 +48,4 @@ export default {
     CC_ws.unsubscription()
   },
 }
-
-
 </script>

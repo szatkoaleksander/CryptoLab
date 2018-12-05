@@ -1,15 +1,17 @@
 <template>
   <div>
     <br/>
-    <b-container fluid>
-      <b-row class="shadow p-3 mb-3 bg-white rounded">
-        <b-col>
+      <b-row>
+        <b-col cols="12" sm="12" md="12" lg class="shadow p-3 mb-3 bg-white rounded mr-3">
           <TradingView :currency="this.currency" :key="$route.fullPath"/>
+        </b-col>
+
+        <b-col lg="3" class="shadow p-3 mb-3 bg-white rounded ">
+          <CryptoInfoPanel :currency="this.currency" :key="$route.fullPath"/>
         </b-col>
       </b-row>
       <FastTransaction :currency="this.currency"/>
-      <HistoryMarket :currency="this.currency" :transactionType="1" :key="$route.fullPath"/>
-    </b-container>
+      <HistoryMarket :currency="this.currency" :key="$route.fullPath"/>
   </div>
 </template>
 
@@ -17,6 +19,7 @@
 import TradingView from '@/components/TradingView.vue'
 import HistoryMarket from '@/components/HistoryMarket.vue'
 import FastTransaction from '@/components/FastTransaction.vue'
+import CryptoInfoPanel from '@/components/CryptoInfoPanel.vue'
 
 export default {
   name: 'Market',
@@ -28,7 +31,8 @@ export default {
   components: {
     TradingView,
     HistoryMarket,
-    FastTransaction
+    FastTransaction,
+    CryptoInfoPanel
   },
   beforeRouteUpdate(to, from, next) {
     this.currency = to.params.currency

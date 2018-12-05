@@ -14,7 +14,7 @@ const getters = {
 }
 
 const actions = {
-  [FETCH_CRYPTO_PRICE](context, payload) {
+  [FETCH_CRYPTO_PRICE] (context, payload) {
     CC_ws.socket.on("m", function(message) {
       var messageType = message.substring(0, message.indexOf("~"));
       if (messageType == '5') {
