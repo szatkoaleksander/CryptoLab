@@ -9,7 +9,7 @@ namespace CryptoLab.Domain.IRepositories
     {
         Task<IEnumerable<History>> GetAllAsyncBy(Guid userId, string currency, OperationType operationType);
         Task<IEnumerable<History>> GetAllAsyncBy(string currency, OperationType operationType);
-        Task<IEnumerable<History>> GetAllAsync();
+        Task<IEnumerable<History>> GetAllAsyncBy(Guid userId);
         Task AddAsync(History hisotry);
         Task RemoveAsync(History hisotry); 
     }

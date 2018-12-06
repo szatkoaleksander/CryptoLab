@@ -10,7 +10,7 @@ namespace CryptoLab.Infrastructure.IServices
     {
         Task<IEnumerable<HistoryDto>> GetAsyncBy(Guid userId, string currency, OperationType operationType);
         Task<IEnumerable<HistoryDto>> GetAllAsyncBy(string currency, OperationType operationType);
-        Task<IEnumerable<HistoryDto>> GetAllAsync();
+        Task<IEnumerable<HistoryDto>> GetAllAsyncBy(Guid userId);
         Task AddAsync(OperationType operationType, string currency, decimal amountOfMoney, decimal price, Guid userId);
     }
 }

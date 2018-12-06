@@ -42,9 +42,9 @@ namespace CryptoLab.Infrastructure.Services
             return _mapper.Map<IEnumerable<History>, IEnumerable<HistoryDto>>(userHistories);
         }
 
-        public async Task<IEnumerable<HistoryDto>> GetAllAsync()
+        public async Task<IEnumerable<HistoryDto>> GetAllAsyncBy(Guid userId)
         {
-            var userHistories = await _historyRepository.GetAllAsync();
+            var userHistories = await _historyRepository.GetAllAsyncBy(userId);
 
             return _mapper.Map<IEnumerable<History>, IEnumerable<HistoryDto>>(userHistories);
         }

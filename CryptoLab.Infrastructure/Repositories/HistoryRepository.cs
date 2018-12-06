@@ -28,8 +28,8 @@ namespace CryptoLab.Infrastructure.Repositories
                                     .Where(x => x.OperationType == operationType)
                                     .ToListAsync();
 
-        public async Task<IEnumerable<History>> GetAllAsync()
-           => await _context.History.ToListAsync();
+        public async Task<IEnumerable<History>> GetAllAsyncBy(Guid userId)
+           => await _context.History.Where(x => x.UserId == userId).ToListAsync();
 
         public async Task AddAsync(History history)
         {
