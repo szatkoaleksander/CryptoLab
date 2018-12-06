@@ -2,8 +2,8 @@ import axios from 'axios'
 import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr'
 import JwtService from '@/common/jwt.service'
 import { API_URL } from '@/common/config'
-import { FETCH_MARKET_HISTORIES_BUY, FETCH_MARKET_HISTORIES_SELL } from './actions.type'
-import { SET_MARKET_HISTORIES_BUY, SET_MARKET_HISTORIES_SELL } from './mutations.type'
+import { FETCH_MARKET_HISTORIES_BUY, FETCH_MARKET_HISTORIES_SELL, FETCH_USER_HISTORIES } from './actions.type'
+import { SET_MARKET_HISTORIES_BUY, SET_MARKET_HISTORIES_SELL, SET_USER_HISTORIES } from './mutations.type'
 
 const hubConnection = new HubConnectionBuilder()
   .withUrl('http://localhost:5000/hub/histories', { accessTokenFactory: () => 'Bearer ' + JwtService.getToken() })
@@ -13,7 +13,8 @@ hubConnection.start()
 
 const state = {
   marketHistoriesBuy: [],
-  marketHistoriesSell: []
+  marketHistoriesSell: [],
+  userHistories: []
 }
 
 const getters = {
@@ -22,7 +23,9 @@ const getters = {
   },
   marketHistoriesSell (state) {
     return state.marketHistoriesSell.slice().reverse()
-  
+  },
+  userHistories (state) {
+    return state.userHistories
   }
 }
 
@@ -37,6 +40,12 @@ const actions = {
     axios.get(API_URL + 'histories/' + payload.currency + `/` + '1', { headers: { Authorization: 'Bearer ' + JwtService.getToken() } })
       .then(({ data }) => {
         context.commit(SET_MARKET_HISTORIES_SELL, data)
+      })
+  },
+  [FETCH_USER_HISTORIES] (context) {
+    axios.get(API_URL + 'histories/userhistories', { headers: { Authorization: 'Bearer ' + JwtService.getToken() } })
+      .then(({ data }) => {
+        context.commit(SET_USER_HISTORIES, data)
       })
   }
 }
@@ -59,6 +68,9 @@ const mutations = {
     })
 
     state.marketHistoriesSell = marketHistoriesSell
+  },
+  [SET_USER_HISTORIES] (state, userHistories) {
+    state.userHistories = userHistories
   }
 }
 
