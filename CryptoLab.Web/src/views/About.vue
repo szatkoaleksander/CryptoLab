@@ -1,11 +1,12 @@
 <template>
   <div>
-    <p>©copyright by Aleksander Szatko</p>
-  </div>
+    <h1>About</h1>
+  </div>   
 </template>
 
 <script>
 export default {
-  name: 'Footer'
+  name: 'About'
 }
 </script>
+
