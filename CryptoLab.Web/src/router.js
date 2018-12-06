@@ -24,17 +24,27 @@ export default new Router({
           path: 'market/:currency',
           name: 'Market',
           component: () => import('@/views/Market')
+        },
+        {
+          path: 'history',
+          name: 'History',
+          component: () => import('@/views/History')
+        },
+        {
+          path: 'about',
+          name: 'About',
+          component: () => import('@/views/About')
         }
       ]
     },
-    { 
+    {
       path: '/404',
       name: 'NotFound', 
       component: () => import('@/views/NotFound') 
-    },  
-    { 
+    },
+    {
       path: '*', 
       redirect: '/404' 
-    } 
+    }
   ]
 })
