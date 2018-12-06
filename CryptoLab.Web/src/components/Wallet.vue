@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul id="example-1">
+    <ul id="wallet-list">
       <li v-bind:key="item.id" v-for="item in userWallets">
         {{ item.currency }} - {{ item.amountOfMoney }}
       </li>
