@@ -23,8 +23,6 @@ namespace CryptoLab.Api.Controllers
         [Authorize(Policy = "user")]
         public async Task<IActionResult> GetWallets()
         {
-            await DispatchAsync(new AuthCommand());
-
             var wallets = await _walletService.GetAllAsync(UserId);
 
             if(wallets == null)

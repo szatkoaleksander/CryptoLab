@@ -23,7 +23,7 @@ namespace CryptoLab.Api.Controllers
         [HttpGet]
         [Route("{currency}/{operationType}")]
         [Authorize(Policy = "user")]
-        public async Task<IActionResult> Get(string currency, OperationType operationType)
+        public async Task<IActionResult> GetAllHistories(string currency, OperationType operationType)
         {
             var histories = await _historyService.GetAllAsyncBy(currency, operationType);
             
@@ -33,10 +33,8 @@ namespace CryptoLab.Api.Controllers
         [HttpGet]
         [Route("[action]")]
         [Authorize(Policy = "user")]
-        public async Task<IActionResult> UserHistories()
+        public async Task<IActionResult> GetUserHistories()
         {
-            await DispatchAsync(new AuthCommand());
-
             var histories = await _historyService.GetAllAsyncBy(UserId);
 
             if(histories == null)
