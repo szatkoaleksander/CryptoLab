@@ -33,7 +33,7 @@ namespace CryptoLab.Api.Controllers
         [HttpGet]
         [Route("[action]")]
         [Authorize(Policy = "user")]
-        public async Task<IActionResult> GetUserHistories()
+        public async Task<IActionResult> UserHistories()
         {
             var histories = await _historyService.GetAllAsyncBy(UserId);
 
