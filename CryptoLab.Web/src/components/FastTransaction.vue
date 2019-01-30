@@ -9,6 +9,7 @@
           <b-form-input size="sm" id="exampleInput1"
             v-model="amountOfMoneyToBuy"
             required
+            :state="amountOfMoneyToBuyState"
             placeholder="value">
           </b-form-input>
         </b-form-group>
@@ -23,6 +24,7 @@
           <b-form-input size="sm" id="exampleInput2"
             v-model="amountOfMoneyToSell"
             required
+            :state="amountOfMoneyToSellState"
             placeholder="value">
           </b-form-input>
         </b-form-group>
@@ -45,6 +47,14 @@ export default {
     return {
       amountOfMoneyToBuy: 0,
       amountOfMoneyToSell: 0
+    }
+  },
+  computed: {
+    amountOfMoneyToBuyState () {
+      return this.amountOfMoneyToBuy > 0 ? true : false
+    },
+    amountOfMoneyToSellState () {
+      return this.amountOfMoneyToSell > 0 ? true : false
     }
   },
   methods: {
