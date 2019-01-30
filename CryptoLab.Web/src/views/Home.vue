@@ -1,12 +1,12 @@
 <template>
-  <div style="background-color: #eef2ed;">
+  <div v-if="isAuthenticated == true" style="background-color: #eef2ed;">
     <Navbar/>
     <b-container fluid>
       <b-row>
         <b-col class="shadow p-3 bg-white rounded" style="background-color: #eef2ed" sm="2">
           <Menu/>
         </b-col>
-        <b-col class="shadow p-3 #7cdeff">
+        <b-col class="shadow p-3 #7cdeff" :key="$route.fullPath">
           <router-view></router-view>
         </b-col>
       </b-row>
@@ -14,6 +14,9 @@
         <Footer/>
       </b-row>
     </b-container>
+  </div>
+  <div v-else>
+    {{isLogout()}}
   </div>
 </template>
 
@@ -35,6 +38,11 @@ export default {
       'isAuthenticated',
       'userWallets'
     ])
+  },
+  methods: {
+    isLogout: function() {
+      this.$router.push({ name: 'MainPage' })
+    }
   }
 }
 </script>
