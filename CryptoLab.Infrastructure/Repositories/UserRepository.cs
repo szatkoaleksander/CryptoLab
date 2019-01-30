@@ -17,7 +17,7 @@ namespace CryptoLab.Infrastructure.Repositories
         {
             _context = context;
         }
-        
+
         public async Task<User> FindAsync(Guid id)
            => await _context.User.Include(x => x.Wallets).Include(x => x.Histories).SingleOrDefaultAsync(x => x.Id == id);
 
@@ -27,7 +27,7 @@ namespace CryptoLab.Infrastructure.Repositories
         public async Task<User> FindByUsernameAsync(string username)
             => await _context.User.Include(x => x.Wallets).Include(x => x.Histories).SingleOrDefaultAsync(x => x.Username == username);
 
-           
+
         public async Task<IEnumerable<User>> GetAllAsync()
             => await _context.User.ToListAsync();
 
@@ -36,6 +36,7 @@ namespace CryptoLab.Infrastructure.Repositories
             await _context.User.AddAsync(user);
             await _context.SaveChangesAsync();
         }
+
         public async Task UpdateAsync(User user)
         {
             _context.User.Update(user);

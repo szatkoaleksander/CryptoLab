@@ -4,10 +4,10 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <h1 class="cover-heading">CryptoLab</h1>
       <p class="lead">Make money & have fun</p>
-        <Login/> 
-        <h4>/</h4> 
+        <Login/>
+        <h4>/</h4>
         <Register/>
-    </div>   
+    </div>
   </div>
 </template>
 
@@ -34,7 +34,7 @@ a:hover {
 .btn-secondary:hover,
 .btn-secondary:focus {
   color: #333;
-  text-shadow: none; 
+  text-shadow: none;
   background-color: #fff;
   border: .05rem solid #fff;
 }

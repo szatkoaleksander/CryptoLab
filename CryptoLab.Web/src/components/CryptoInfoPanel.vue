@@ -9,7 +9,7 @@
     <div v-if="this.crypto_info['FLAGS'] == 4">
       <h5 style="color: black">Price - {{this.crypto_info['PRICE']}}</h5>
     </div>
-			
+
     <h6>24h Change:{{this.crypto_info['CHANGE24HOUR']}}<br>{{this.crypto_info['CHANGE24HOURPCT']}}<br></h6>
 		<h6>Open Hour:{{this.crypto_info['OPENHOUR']}}<br></h6>
 		<h6>High Hour:{{this.crypto_info['HIGHHOUR']}}<br></h6>
@@ -26,7 +26,6 @@
 import { FETCH_CRYPTO_PRICE } from '@/stores/actions.type'
 import { mapGetters } from 'vuex'
 import CC_ws from '@/common/cryptocompare_ws.service'
-import io from 'socket.io-client'
 
 export default {
   name: 'CryptoInfoPanel',

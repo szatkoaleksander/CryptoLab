@@ -25,7 +25,6 @@
                 placeholder="Enter password">
               </b-form-input>
             </b-form-group>
-
             <b-button class="float-right" type="submit" variant="primary" data-dismiss="modal">Login</b-button>
           </b-form>
         </b-modal>
@@ -49,7 +48,9 @@ export default {
     onSubmit (email, password) {
       this.$store
         .dispatch(LOGIN, { email, password })
-        .then(() => this.$router.push({ name: 'Dashboard' }))
+        .then(() =>
+          this.$router.push({ name: 'Dashboard' })
+        )
     }
   }
 }
