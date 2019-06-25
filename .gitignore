@@ -282,7 +282,9 @@ __pycache__/
 
 # misc
 .DS_Store
+/dist
 .env.local
+.env.*.local
 .env.development.local
 .env.test.local
 .env.production.local

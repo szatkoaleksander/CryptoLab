@@ -52,6 +52,21 @@ namespace CryptoLab.Api.Controllers
             return Ok(user);
         }
 
+        [HttpGet]
+        [Route("me")]
+        [Authorize(Policy = "user")]
+        public async Task<IActionResult> GetMe()
+        {
+            var user = await _userService.FindAsync(UserId);
+
+            if(user == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(user);
+        }
+
         [HttpPost]
         [Route("[action]")]
         [AllowAnonymous]
@@ -61,6 +76,5 @@ namespace CryptoLab.Api.Controllers
 
             return Created($"users/{command.Email}", new object());
         }
-        
     }
 }

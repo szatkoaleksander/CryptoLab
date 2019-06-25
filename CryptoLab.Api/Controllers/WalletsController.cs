@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using CryptoLab.Infrastructure.Commands;
+using CryptoLab.Infrastructure.Commands.Auth;
 using CryptoLab.Infrastructure.Commands.Wallet;
 using CryptoLab.Infrastructure.IServices;
 using Microsoft.AspNetCore.Authorization;
@@ -19,13 +20,17 @@ namespace CryptoLab.Api.Controllers
         }
 
         [HttpGet]
-        [Route("[action]")]
         [Authorize(Policy = "user")]
-        public async Task<IActionResult> Ranking()
+        public async Task<IActionResult> GetWallets()
         {
-            var ranking = await _walletService.RankingAsync();
+            var wallets = await _walletService.GetAllAsync(UserId);
 
-            return Ok(JsonConvert.SerializeObject(ranking));
+            if(wallets == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(wallets);
         }
 
         [HttpPost]
@@ -38,4 +43,4 @@ namespace CryptoLab.Api.Controllers
             return Ok();
         }
     }
-}
+} 

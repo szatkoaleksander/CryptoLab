@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CryptoLab.Domain.Domain;
 using CryptoLab.Domain.IRepositories;
@@ -17,11 +18,18 @@ namespace CryptoLab.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<History> GetAsync(Guid userId)
-            => await _context.History.SingleOrDefaultAsync(x => x.UserId == userId);
-        
-        public async Task<IEnumerable<History>> GetAllAsync()
-           => await _context.History.ToListAsync();
+        public async Task<IEnumerable<History>> GetAllAsyncBy(Guid userId, string currency, OperationType operationType)
+            => await _context.History.Where(x => x.UserId == userId)
+                                     .Where(x => x.Currency == currency.ToUpperInvariant())
+                                     .Where(x => x.OperationType == operationType)
+                                     .ToListAsync();
+        public async Task<IEnumerable<History>> GetAllAsyncBy(string currency, OperationType operationType)
+           => await _context.History.Where(x => x.Currency == currency.ToUpperInvariant())
+                                    .Where(x => x.OperationType == operationType)
+                                    .ToListAsync();
+
+        public async Task<IEnumerable<History>> GetAllAsyncBy(Guid userId)
+           => await _context.History.Where(x => x.UserId == userId).ToListAsync();
 
         public async Task AddAsync(History history)
         {
