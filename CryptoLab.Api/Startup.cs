@@ -118,7 +118,7 @@ namespace CryptoLab.Api
                     .AllowAnyHeader()
                     .AllowAnyOrigin()
                     .AllowCredentials()
-                    .WithOrigins("http://localhost:3000");
+                    .WithOrigins("http://localhost:3000", "https://www.cryptolab.best");
 
             }));
 
