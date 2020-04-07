@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using CryptoLab.Domain.Domain;
@@ -14,12 +15,15 @@ namespace CryptoLab.Infrastructure.Services
         private readonly IUserRepository _userRepository;
         private readonly IEncrypter _encrypter;
         private readonly IMapper _mapper;
+        private readonly IWalletService _walletService;
 
-        public UserService(IUserRepository userRepository, IEncrypter encrypter, IMapper mapper)
+        public UserService(IUserRepository userRepository, IEncrypter encrypter,
+            IMapper mapper, IWalletService walletService)
         {
             _userRepository = userRepository;
             _encrypter = encrypter;
             _mapper = mapper;
+            _walletService = walletService;
         }
 
         public async Task<UserDto> FindAsync(Guid id)
@@ -41,10 +45,10 @@ namespace CryptoLab.Infrastructure.Services
             var user = await _userRepository.FindAsync(email);
             var userUsername = await _userRepository.FindByUsernameAsync(username);
 
-            if(user != null) 
+            if (user != null)
                 throw new Exception("User is exists");
 
-            if(userUsername != null && userUsername.Username == username) 
+            if (userUsername != null && userUsername.Username == username)
                 throw new Exception("User is exists");
 
             var salt = _encrypter.GetSalt(password);
@@ -53,6 +57,14 @@ namespace CryptoLab.Infrastructure.Services
             user = new User(email, username, hash, salt, "user");
 
             await _userRepository.AddAsync(user);
+
+            var coin = new List<string>();
+            coin.Add("BTC");
+            coin.Add("USD");
+            coin.Add("LTC");
+            coin.Add("ETH");
+
+            await _walletService.AddAsync(coin, user.Id);
         }
     }
 }

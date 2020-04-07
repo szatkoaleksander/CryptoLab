@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800&display=swap');
+
+//BULMA VAR
+$navbar-breakpoint: 240px;
+
+@import './variables.scss';
+@import './spacing.scss';
+
+@import 'bulma';
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.title {
+  font-weight: 400;
+}
+
+.menu-list a {
+  border-radius: 0px 10px 10px 0px;
+  width: 95%;
+}
+
+.menu-list li ul {
+  border: none;
+}

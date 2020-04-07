@@ -1,0 +1,15 @@
+@import '../../scss/Global.scss';
+
+.message {
+  margin-right: 1rem;
+  background: $color_white;
+  white-space: 'nowrap';
+
+  &__hidden {
+    visibility: 'hidden';
+  }
+
+  &__element {
+    margin-right: 0.2rem;
+  }
+}

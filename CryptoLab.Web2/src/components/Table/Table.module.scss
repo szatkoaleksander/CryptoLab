@@ -1,0 +1,15 @@
+@import '../../scss/Global.scss';
+
+.table {
+  &__input {
+    border: none;
+    border-bottom: 1px solid $color_black;
+    margin-left: 0.5rem;
+    width: 30px;
+  }
+
+  &__select {
+    border: none;
+    border-bottom: 1px solid black;
+  }
+}

@@ -47,13 +47,13 @@ namespace CryptoLab.Api
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IHistoryRepository, HistoryRepository>();
             services.AddScoped<IWalletRepository, WalletRepository>();
-            
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IWalletService, WalletService>();
             services.AddScoped<ITransactionService, TransactionService>();
             services.AddScoped<IHistoryService, HistoryService>();
-          
+
             services.AddSingleton<IEncrypter, Encrypter>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
 
@@ -75,27 +75,27 @@ namespace CryptoLab.Api
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                 );
             });
-            
-            services.AddAuthentication(options =>  
-            {  
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;  
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-              
+
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("000_cat_test_key_123")),  
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("000_cat_test_key_123")),
 
-                    ValidateIssuer = true,  
+                    ValidateIssuer = true,
                     ValidIssuer = "http://localhost:5000",
 
-                    ValidateAudience = false,   
-                    ValidateLifetime = true,  
-                   
-                    ClockSkew = TimeSpan.Zero 
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+
+                    ClockSkew = TimeSpan.Zero
                 };
 
                 options.Events = new JwtBearerEvents()
@@ -111,19 +111,28 @@ namespace CryptoLab.Api
                 };
             });
 
+            services.AddCors(options => options.AddPolicy("CorsPolicy", option =>
+            {
+                option
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin()
+                    .AllowCredentials()
+                    .WithOrigins("http://localhost:3000");
+
+            }));
+
             services.AddSignalR();
 
             services.AddMvc()
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented)
                 .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddCors();
-
             var builder = new ContainerBuilder();
-                builder.Populate(services);
-                builder.RegisterModule<CommandModule>();
+            builder.Populate(services);
+            builder.RegisterModule<CommandModule>();
 
-                ApplicationContainer = builder.Build();
+            ApplicationContainer = builder.Build();
 
             return new AutofacServiceProvider(ApplicationContainer);
         }
@@ -139,21 +148,16 @@ namespace CryptoLab.Api
                 app.UseHsts();
             }
 
-            app.UseCors(builder => builder.WithOrigins("http://localhost:8080")
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());   
 
+            app.UseCors("CorsPolicy");
             app.UseAuthentication();
-
             app.UseSignalR(routes =>
             {
                 routes.MapHub<HistoryHub>("/hub/histories");
             });
 
             app.UseMvc();
-        
+
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
     }

@@ -1,0 +1,31 @@
+@import '../../scss/Global.scss';
+
+.wrapper {
+  background-image: url('../../assets/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .logo {
+    text-align: center;
+    padding-top: 5rem;
+    font-weight: 400;
+    font-size: -webkit-xxx-large;
+  }
+
+  .sub {
+    text-align: center;
+    font-size: smaller;
+    font-weight: 500;
+    font-style: oblique;
+  }
+
+  .hero_mod {
+    align-items: start !important;
+    padding-top: 3rem;
+  }
+
+  .card {
+    border-radius: 7px;
+    padding: 1.5rem;
+  }
+}

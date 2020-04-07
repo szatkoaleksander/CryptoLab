@@ -1,0 +1,78 @@
+@import '../../scss/Global.scss';
+
+.wrapper {
+  // background-color: $color-primary;
+  background-color: #003156;
+  position: fixed;
+  min-width: 15rem;
+  height: 100vh;
+  transition: transform 0.5s ease-in-out;
+
+  // @media screen and (max-width: 600px) {
+  //   .wrapper {
+  //     display: none;
+  //   }
+  // }
+
+  @media screen and (max-width: 769px) {
+    z-index: 1;
+    margin-top: 52px;
+    position: absolute;
+    height: 100%;
+  }
+
+  @media screen and (min-width: 770px) {
+    margin-top: 0px;
+  }
+
+  .link {
+    color: $color_white;
+  }
+}
+
+.visible {
+  transform: translate(0);
+}
+
+.unvisible {
+  transform: translate(-100%);
+}
+
+.title {
+  color: $color-white;
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.about {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  margin: 1rem;
+
+  &__icon {
+    color: red;
+  }
+}
+
+.show_submenu {
+  display: none;
+}
+.not_submenu {
+  display: block;
+}
+
+.ic {
+  transition: transform 0.5s ease-in-out;
+  display: block;
+}
+
+.ic_not {
+  transition: transform 0.5s ease-in-out;
+  transform: rotate(0deg);
+}
+
+.ic_active {
+  transition: transform 0.5s ease-in-out;
+  transform: rotate(-90deg);
+}

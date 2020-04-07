@@ -1,0 +1,11 @@
+.wrapper {
+  position: relative;
+}
+
+.content {
+  margin-left: 15rem;
+
+  @media screen and (max-width: 769px) {
+    margin-left: 0;
+  }
+}

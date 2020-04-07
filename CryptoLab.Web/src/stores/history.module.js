@@ -43,7 +43,11 @@ const actions = {
       })
   },
   [FETCH_USER_HISTORIES] (context) {
-    axios.get(API_URL + 'histories/userhistories', { headers: { Authorization: 'Bearer ' + JwtService.getToken() } })
+    axios.get(API_URL + 'histories/userhistories',  { 
+      headers: { 
+        Authorization: 'Bearer ' + JwtService.getToken() 
+      } 
+    })
       .then(({ data }) => {
         context.commit(SET_USER_HISTORIES, data)
       })

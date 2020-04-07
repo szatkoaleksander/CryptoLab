@@ -1,0 +1,23 @@
+@import '../../scss/Global.scss';
+
+.wrapper {
+  .input {
+    box-shadow: none;
+    border: 0;
+    border-bottom: 1.5px solid grey;
+    border-radius: 0;
+  }
+
+  .input:focus {
+    box-shadow: none;
+  }
+
+  .button {
+    background-color: $color-red;
+    color: $color-white;
+
+    &__right {
+      text-align: right;
+    }
+  }
+}

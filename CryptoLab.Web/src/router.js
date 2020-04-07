@@ -25,11 +25,7 @@ export default new Router({
           name: 'Market',
           component: () => import('@/views/Market')
         },
-        {
-          path: 'history',
-          name: 'History',
-          component: () => import('@/views/History')
-        },
+
         {
           path: 'about',
           name: 'About',

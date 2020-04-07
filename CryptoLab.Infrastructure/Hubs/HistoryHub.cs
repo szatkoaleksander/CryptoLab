@@ -7,7 +7,7 @@ namespace CryptoLab.Infrastructure.Hubs
 {
     public class HistoryHub : Hub<IHistoryHub>
     {
-        public async Task Add(History history) 
+        public async Task Add(History history)
             => await Clients.All.Add(history);
     }
 }
