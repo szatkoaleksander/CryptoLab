@@ -8,6 +8,6 @@ namespace CryptoLab.Infrastructure.IServices
     {
         Task<UserDto> FindAsync(Guid id);
         Task<UserDto> FindAsync(string email);
-        Task RegisterAsync(string email, string username, string password);
+        Task RegisterAsync(string email, string username, string password, string confirmPassword);
     }
 }

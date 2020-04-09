@@ -16,7 +16,7 @@ namespace CryptoLab.Infrastructure.Handlers.User
 
         public async Task HandlerAsync(Register command)
         {
-            await _userService.RegisterAsync(command.Email, command.Username, command.Password);
+            await _userService.RegisterAsync(command.Email, command.Username, command.Password, command.ConfirmPassword);
         }
     }
 }

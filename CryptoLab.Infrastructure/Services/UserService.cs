@@ -40,7 +40,7 @@ namespace CryptoLab.Infrastructure.Services
             return _mapper.Map<User, UserDto>(user);
         }
 
-        public async Task RegisterAsync(string email, string username, string password)
+        public async Task RegisterAsync(string email, string username, string password, string confirmPassword)
         {
             var user = await _userRepository.FindAsync(email);
             var userUsername = await _userRepository.FindByUsernameAsync(username);
@@ -50,6 +50,12 @@ namespace CryptoLab.Infrastructure.Services
 
             if (userUsername != null && userUsername.Username == username)
                 throw new Exception("User is exists");
+
+            if (password != confirmPassword)
+                throw new Exception("Password are not equal");
+
+
+           // throw new Exception(password + " " + confirmPassword);
 
             var salt = _encrypter.GetSalt(password);
             var hash = _encrypter.GetHash(password, salt);
