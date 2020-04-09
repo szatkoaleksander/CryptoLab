@@ -5,7 +5,7 @@ export const AUTHENTICATED = 'authenticated_user';
 export const UNAUTHENTICATED = 'unauthenticated_user';
 export const AUTHENTICATION_ERROR = 'authentication_error';
 
-export function signInAction(email, password, history) {
+export const signInAction = (email, password, history) => {
   return async dispatch => {
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/account/login`, {
@@ -22,11 +22,11 @@ export function signInAction(email, password, history) {
       });
     }
   };
-}
+};
 
-export function signOutAction() {
+export const signOutAction = () => {
   localStorage.clear();
   return {
     type: UNAUTHENTICATED,
   };
-}
+};

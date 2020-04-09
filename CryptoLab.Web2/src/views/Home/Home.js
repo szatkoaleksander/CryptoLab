@@ -24,11 +24,11 @@ const Home = ({ match }) => {
   return (
     <div className={styles.wrapper}>
       <Sidebar />
-      <div className={!isExpand && styles.content}>
+      <div className={!isExpand ? styles.content : ''}>
         <Navbar></Navbar>
         <Switch>
           <Route path={routes.dashboard} component={Dashboard} />
-          <Route path={'/market/:currency'} component={Market} />
+          <Route path={routes.market} component={Market} />
           <Route path={routes.history} component={History} />
           <Route path={routes.about} component={About} />
           <Route path={routes.notFound} component={NotFound} />

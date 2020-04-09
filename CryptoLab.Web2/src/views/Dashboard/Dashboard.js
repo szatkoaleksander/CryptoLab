@@ -3,21 +3,15 @@ import axios from 'axios';
 import DoughnutOverlay from '../../components/DoughnutOverlay/DoughnutOverlay';
 import NewsList from '../../components/News/NewsList';
 import TopCoinPanel from '../../components/TopCoinPanel/TopCoinPanel';
-import LineOverlay from '../../components/LineOverlay/LineOverlay';
 import TickerWallet from '../../components/TickerWallet/TickerWallet';
-import moment from 'moment';
 
-import { fetchHistory } from '../../redux/actions/cryptocompare';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Dashboard = () => {
   const [news, setNews] = useState([]);
   const [top, setTop] = useState([]);
-  const [history, setHistory] = useState({ datasets: [], labels: [] });
-  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
-  const his = useSelector(state => state.cryptocompareReducer);
   const wallets = useSelector(state => state.walletsReducer.wallets);
 
   const fetchNews = async () => {
@@ -35,7 +29,6 @@ const Dashboard = () => {
       const response = await axios.get(
         `${process.env.REACT_APP_CC}/top/totalvolfull?limit=10&tsym=USD`,
       );
-      console.log(response.data.Data);
       if (response.data.Response !== 'Error') setTop(response.data.Data);
       else console.error(response.data.Message);
     } catch (e) {
@@ -44,11 +37,10 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    // fetchNews();
-    // fetchTop();
-    // dispatch(fetchHistory());
-    // setIsLoading(his.isFetched);
-  }, [his.isFetched]);
+    fetchNews();
+    fetchTop();
+
+  }, []);
 
   return (
     <section className="section p-t-md">
@@ -57,7 +49,6 @@ const Dashboard = () => {
         <div className="columns">
           <div className="column is-8">
             <h1 className="title">Your wallet</h1>
-            {/* {isLoading ? <LineOverlay data={his.history} /> : <p>Loading...</p>} */}
             {wallets ? <DoughnutOverlay data={wallets} /> : <p>Loading...</p>}
           </div>
           <div className="column is-4">
@@ -67,7 +58,6 @@ const Dashboard = () => {
         </div>
         <hr />
         <div className="columns">
-          {/* <div className="column is-7"></div> */}
           <div className="column is-12">
             <h1 className="title">News</h1>
             <NewsList news={news} />

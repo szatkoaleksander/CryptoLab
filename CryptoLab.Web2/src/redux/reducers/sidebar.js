@@ -1,4 +1,4 @@
-//expand collapse
+
 const sidebarReducer = (state = true, action) => {
   switch (action.type) {
     case 'EXPAND':

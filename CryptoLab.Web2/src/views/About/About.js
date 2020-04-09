@@ -24,9 +24,10 @@ const About = () => {
             <h1 className="title">Application created with:</h1>
             <ul>
               <li>https://min-api.cryptocompare.com/</li>
-              <li>https://min-api.cryptocompare.com/</li>
-              <li>https://min-api.cryptocompare.com/</li>
-              <li>https://min-api.cryptocompare.com/</li>
+              <li>
+                Login background:
+                <a href="https://www.freepik.com/free-vector/abstract-digital-big-data-visualization-background_4952443.htm#page=2&query=crypto&position=13">Link!</a>
+              </li>
             </ul>
           </div>
         </div>

@@ -18,7 +18,7 @@ const TransactionHistory = ({ currency }) => {
 
       setHistoriesPurchase(response.data.slice(0, 15));
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
@@ -30,18 +30,18 @@ const TransactionHistory = ({ currency }) => {
 
       setHistoriesSale(response.data.slice(0, 15));
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
   useEffect(() => {
+    const hubConnect = new HubConnectionBuilder()
+      .withUrl(`${process.env.REACT_APP_API_WS}/histories`, {
+        accessTokenFactory: () => getToken(),
+      })
+      .build();
+
     const createHubConnection = async () => {
-      const hubConnect = new HubConnectionBuilder()
-        .withUrl('http://localhost:5000/hub/histories', {
-          accessTokenFactory: () => getToken(),
-        })
-        .configureLogging(LogLevel.Information)
-        .build();
       try {
         await hubConnect.start();
         setHubConnection(hubConnect);
@@ -58,13 +58,16 @@ const TransactionHistory = ({ currency }) => {
           }
         });
       } catch (e) {
-        console.log('Error while establishing connection' + e);
+        console.error('Error while establishing connection' + e);
       }
     };
 
     createHubConnection();
     fetchHistoriesPurchase();
     fetchHistoriesSale();
+    return () => {
+      hubConnect.stop();
+    };
   }, [currency]);
 
   return (
@@ -81,7 +84,7 @@ const TransactionHistory = ({ currency }) => {
             </thead>
             <tbody>
               {historiesPurchase.map(item => (
-                <tr>
+                <tr key={item.id}>
                   <td>{item.amountOfMoney}</td>
                   <td>{item.price}</td>
                   <td>{item.sum}</td>
@@ -101,7 +104,7 @@ const TransactionHistory = ({ currency }) => {
             </thead>
             <tbody>
               {historiesSale.map(item => (
-                <tr>
+                <tr key={item.id}>
                   <td>{item.amountOfMoney}</td>
                   <td>{item.price}</td>
                   <td>{item.sum}</td>

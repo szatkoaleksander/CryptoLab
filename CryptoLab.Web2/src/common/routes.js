@@ -1,14 +1,14 @@
 export const routes = {
   home: '/',
   dashboard: '/dashboard',
-  market: '/market',
+  market: '/market/:currency',
   history: '/history',
   about: '/about',
   login: '/login',
   notFound: '/404',
 };
 
-export const routess = [
+export const routesv2 = [
   { name: 'Home', route: '/', component: () => import('../views/Market/Market') },
   {
     name: 'Dashboard',

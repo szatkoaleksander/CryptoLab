@@ -3,17 +3,17 @@ import cx from 'classnames';
 
 const Settings = ({ isModalVisible, modalRef }) => {
     return (
-      <div class={cx('modal', { 'is-active': isModalVisible })}>
-        <div class="modal-background"></div>
-        <div ref={modalRef} class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">Modal title</p>
-            <button class="delete" aria-label="close"></button>
+      <div className={cx('modal', { 'is-active': isModalVisible })}>
+        <div className="modal-background"></div>
+        <div ref={modalRef} className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">Modal title</p>
+            <button className="delete" aria-label="close"></button>
           </header>
-          <section class="modal-card-body">
-            <div class="tabs">
+          <section className="modal-card-body">
+            <div className="tabs">
               <ul>
-                <li class="is-active">
+                <li className="is-active">
                   <a>Wallets</a>
                 </li>
                 <li>
@@ -23,22 +23,12 @@ const Settings = ({ isModalVisible, modalRef }) => {
               </ul>
             </div>
           </section>
-          <footer class="modal-card-foot">
-            <button class="button is-success">Save changes</button>
-            <button class="button">Cancel</button>
+          <footer className="modal-card-foot">
+            <button className="button is-success">Save changes</button>
+            <button className="button">Cancel</button>
           </footer>
         </div>
       </div>
-
-      // <div class={cx('modal', { 'is-active': isModalVisible })}>
-      //   <div class="modal-background">
-      //     <div ref={modalRef} class="modal-content">
-      //       TEST
-      //     </div>
-      //   </div>
-
-      //   <button class="modal-close is-large" aria-label="close"></button>
-      // </div>
     );
 };
 

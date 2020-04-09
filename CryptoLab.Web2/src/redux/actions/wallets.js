@@ -10,12 +10,8 @@ export const fetchWallets = () => {
         headers: { Authorization: 'Bearer ' + getToken() },
       });
       dispatch({ type: FETCH_WALLETS, payload: response.data });
-    } catch (error) {
-      dispatch({ type: FETCH_WALLETS });
-      //   dispatch({
-      //     type: AUTHENTICATION_ERROR,
-      //     payload: 'Failed fetched wallets',
-      //   });
+    } catch (e) {
+      console.log(e)
     }
   };
 };

@@ -4,7 +4,7 @@ import cx from 'classnames';
 import Login from '../../components/Login/Login';
 import Register from '../../components/Register/Register';
 
-const Root = ({history}) => {
+const Root = ({ history }) => {
   const [isLoginTab, setIsLoginTab] = useState(true);
 
   return (
@@ -44,6 +44,7 @@ const Root = ({history}) => {
             </div>
           </div>
         </div>
+        <p className="subtitle">Beta version. Work in progress</p>
       </section>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {toast} from 'react-toastify'
 import { getToken } from '../../services/jwt.service';
 
 const Transaction = ({ currency }) => {
@@ -24,8 +25,9 @@ const Transaction = ({ currency }) => {
             headers: { Authorization: 'Bearer ' + getToken() },
           },
         );
+
+        toast.info(`You bought some ${currency}!`);
       } catch (e) {
-        console.log('TSETSETSE');
         setErrorBuy('You dont have enought money');
         console.error(e);
       }
@@ -50,6 +52,8 @@ const Transaction = ({ currency }) => {
             headers: { Authorization: 'Bearer ' + getToken() },
           },
         );
+
+                toast.info(`You sold some ${currency}!`);
       } catch (e) {
         setErrorSell('You dont have enought money');
         console.error(e);

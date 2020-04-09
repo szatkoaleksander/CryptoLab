@@ -10,7 +10,7 @@ const TickerWallet = () => {
   useEffect(() => {
     if (wallets) {
       const walletsInfo = wallets.map(item => (
-        <span className={styles.message__element}>
+        <span key={item.currency} className={styles.message__element}>
           <b>{item.currency}</b> - {item.amountOfMoney},
         </span>
       ));
@@ -27,11 +27,7 @@ const TickerWallet = () => {
 
 function StockTicker() {
   return (
-    <Ticker
-      mode="chain"
-      offset="run-in"
-      speed={7}
-    >
+    <Ticker mode="chain" offset="run-in" speed={7}>
       {() => <TickerWallet />}
     </Ticker>
   );

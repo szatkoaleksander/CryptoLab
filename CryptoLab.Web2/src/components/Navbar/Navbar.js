@@ -34,8 +34,8 @@ const Navbar = () => {
               <img src={userIcon} alt="user" />
 
               <div className="navbar-dropdown is-boxed is-right">
-                <div className="navbar-item" onClick={() => setModalVisibility(true)}>
-                  Settings
+                <div className="navbar-item" onClick={() => setModalVisibility(false)}>
+                  Settings (soon)
                 </div>
                 <hr className="navbar-divider" />
                 <Link className="navbar-item" to="/login" onClick={() => dispatch(signOutAction())}>
@@ -46,7 +46,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <Settings isModalVisible={isModalVisible} modalRef={modalRef}/>
+      <Settings isModalVisible={isModalVisible} modalRef={modalRef} />
     </nav>
   );
 };

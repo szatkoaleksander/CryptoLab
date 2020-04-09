@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import cx from 'classnames';
 import styles from './Register.module.scss';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -11,34 +12,31 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const handleLogin = async e => {
+  const handleRegister = async e => {
     e.preventDefault();
     setIsLoading(false);
     setIsError(false);
 
     try {
       setIsLoading(true);
-      const response = await axios.post('http://localhost:5000/api/users/register', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/register`, {
         email: email,
         username: username,
         password: password,
         confirmPassword: confirmPassword,
       });
-      const { token } = response.data;
 
-      console.log(token);
-
-      //   localStorage.setItem('token', token);
-
-      //   console.log(localStorage.getItem('token'));
+      toast.info('Account has been created! Now you can try to login.');
     } catch (e) {
       setIsError(true);
       console.error(e);
     }
+
+    setIsLoading(false);
   };
 
   return (
-    <form onSubmit={handleLogin} className={styles.wrapper}>
+    <form onSubmit={handleRegister} className={styles.wrapper}>
       <div className="field">
         <div className="control">
           <input
@@ -89,7 +87,9 @@ const Register = () => {
       </div>
       <div className="field m-t-xs">
         <p className={cx('control', styles.button__right)}>
-          <button className={cx('button', styles.button)}>Register</button>
+          <button className={cx('button', styles.button, isLoading && 'is-loading')}>
+            Register
+          </button>
         </p>
       </div>
       {isError && <p className="has-text-danger">Problem with create new account</p>}

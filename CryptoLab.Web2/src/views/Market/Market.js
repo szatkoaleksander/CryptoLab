@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TradingView from '../../components/TradingView/TradingView';
 import CryptoInfoPanel from '../../components/CryptoInfoPanel/CryptoInfoPanel';
 import Transaction from '../../components/Transaction/Transaction';
