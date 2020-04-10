@@ -13,7 +13,7 @@ const Login = ({ history }) => {
   const dispatch = useDispatch();
 
   const isUserAuth = useSelector(state => state.authReducer);
-  console.log(isUserAuth);
+
   const handleLogin = async e => {
     e.preventDefault();
     setIsError(false);

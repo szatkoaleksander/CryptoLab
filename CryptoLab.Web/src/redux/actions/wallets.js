@@ -11,7 +11,7 @@ export const fetchWallets = () => {
       });
       dispatch({ type: FETCH_WALLETS, payload: response.data });
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
   };
 };
