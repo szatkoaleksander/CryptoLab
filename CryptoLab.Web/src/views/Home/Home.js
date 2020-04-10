@@ -28,7 +28,7 @@ const Home = ({ match }) => {
         <Navbar></Navbar>
         <Switch>
           <Route path={routes.dashboard} component={Dashboard} />
-          <Route path={routes.market} component={Market} />
+          <Route path={'/market/:currency'} component={Market} />
           <Route path={routes.history} component={History} />
           <Route path={routes.about} component={About} />
           <Route path={routes.notFound} component={NotFound} />

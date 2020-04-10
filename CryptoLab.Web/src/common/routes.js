@@ -1,7 +1,7 @@
 export const routes = {
   home: '/',
   dashboard: '/dashboard',
-  market: '/market/:currency',
+  market: '/market',
   history: '/history',
   about: '/about',
   login: '/login',

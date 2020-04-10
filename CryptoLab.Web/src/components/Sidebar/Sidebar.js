@@ -47,9 +47,9 @@ const Sidebar = () => {
             <li>
               <a className={styles.link} onClick={() => setIsSubmenuOpen(!isSubmenuOpen)}>
                 Market
-                <FaChevronDown
+                {/* <FaChevronDown
                   className={(styles.ic, isSubmenuOpen ? styles.not : styles.ic_active)}
-                />
+                /> */}
               </a>
               <ul className={cx(isSubmenuOpen ? styles.show_submenu : styles.not_submenu)}>
                 {coins.map(item => {

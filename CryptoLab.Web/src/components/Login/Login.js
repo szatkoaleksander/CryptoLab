@@ -5,8 +5,8 @@ import styles from './Login.module.scss';
 import cx from 'classnames';
 
 const Login = ({ history }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin_test@cl.best');
+  const [password, setPassword] = useState('zxczxczxc');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -21,9 +21,9 @@ const Login = ({ history }) => {
     dispatch(signInAction(email, password, history));
 
     setIsLoading(isUserAuth.authenticated);
-    if (isUserAuth.authenticated === false) {
-      setIsError(true);
-    }
+    // if (isUserAuth.authenticated === false) {
+    //   setIsError(true);
+    // }
   };
 
   return (
