@@ -12,7 +12,7 @@
     "axios": "^0.18.0",
     "babel-loader": "^8.0.4",
     "bootstrap-vue": "^2.0.0-rc.11",
-    "jspdf": "^1.4.1",
+    "jspdf": "^2.3.1",
     "jspdf-autotable": "^2.3.5",
     "npm": "^6.4.1",
     "socket.io-client": "^2.1.1",
